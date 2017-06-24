@@ -1,0 +1,22 @@
+EXPLAIN ABOUT USING INSERT MEDIAS MODAL at OTHER WHERE
+
+- Step 1: Include Insert Media Modal to block modal:
+	+ Ex:
+		{% block modal %}
+			{{ block.super }}
+			{% include 'collection/media/insert-medias.html' %}			
+		{% endblock %}
+		
+- Step 2: HTML Button/Icon/Hyper link, etc.. to show modal:
+	+ Ex: 
+		<button id="btn_insert_media" class="btn" type="button">{% trans 'Insert Medias' %}</button>
+		
+-  Step 3: Using init function to override Insert Media action: You insert code bellow at the where JS you using
+	+ Ex:
+		jQuery(function($){
+			insert_media_action('#btn_insert_media', callback_function);
+		});
+		
+	+ Note:
+		- '#btn_insert_media' is ID of html button (in step 2)
+		- 'callback_function' is the function you do when click OK button on Insert Media modal

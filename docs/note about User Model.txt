@@ -1,0 +1,10 @@
+ ****** Important ********
+1.
+DO NOT USE:
+from django.contrib.auth.models import User
+
+MUST USE:
+from core.models import User
+
+2. Table auth_user renamed to core_user
+    to get name of table user please use User._meta.db_table

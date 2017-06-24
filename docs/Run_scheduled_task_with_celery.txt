@@ -1,0 +1,116 @@
+#Hu`ng
+
+=====================================
+RUN CRONTAB scheduled tasks in django
+=====================================
+Usage: when sending messages, email, newsletter automatically and periodically
+=====================================
+INSTRUCTION:
+django: 1.5
+celery: 3.0
++ WINDOW:
+- Install:
+-- pip install django-celery
+-- pip install kombu
+- Configure:
+-- settings.py:
+-----import djcelery; djcelery.setup_loader()
+
+	INSTALLED_APPS = (....,'djcelery',
+			   'kombu.transport.django', ...)
+
+-----BROKER_URL = 'django://'
+-----BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
+
+-----from celery.schedules import crontab
+
+-----CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+-----CELERYBEAT_PIDFILE = PROJECT_ROOT + "\celerybeat.pid"
+-----CELERYBEAT_SCHEDULE = {
+    "send-message-automatically": {
+        "task": ".tasks.auto_send_message",
+        "schedule": crontab(), # every minute
+    }
+}
+-- python manage.py syncdb
+
+-- Using:
+-----tasks.py: 
+	from celery.task import task
+	@task
+	def auto_send_message():
+		# send message processing here
+===================================================================================
+-- RUNNING:
+----- cmd.exe 1: python manage.py celeryd -l INFO
+    ----- cmd.exe 2: python manage.py celerybeat -S djcelery.schedulers.DatabaseScheduler
+===================================================================================
+==>OK, it will run as "schedule" in CELERYBEAT_SCHEDULE (settings.py)
+
++ LINUX
+1. Install and configure as same as those for Windows (except Running part)
+2. Runing celery (same as django-celery) as BACKGROUND deamon:
+
+STEPS:
+Step 1: 
+-- Download 2 files: "celeryd" and "celerybeat" from here https://github.com/celery/celery/tree/3.0/extra/generic-init.d/ 
+-- Copy them to /etc/init.d/ (so that, /etc/init.d/celeryd, /etc/init.d/celerybeat)
+
+Step 2: 
+Create 2 file: celeryd and celerybeat. 
+- celeryd: 
+	CELERYD_NODES="w1"
+	CELERYD_CHDIR="/home/web/www/eShop/"
+	CELERYD_MULTI="$CELERYD_CHDIR/manage.py celeryd_multi"
+	CELERYCTL="$CELERYD_CHDIR/manage.py celeryctl"
+	CELERYD_OPTS="--time-limit=300 --concurrency=8"
+	CELERYD_LOG_FILE="/var/log/celery/celery.log"
+	CELERYD_PID_FILE="/var/run/celery/celery.pid"
+
+	CELERYD_USER="celery"
+	CELERYD_GROUP="celery"
+	export DJANGO_SETTINGS_MODULE="settings"
+
+- celerybeat:
+	CELERYBEAT_CHDIR="/opt/Project/"
+	export DJANGO_SETTINGS_MODULE="settings"
+	CELERYBEAT="/opt/Project/manage.py celerybeat"
+
+Then, copy them to /etc/default/ => /etc/default/celeryd; /etc/default/celerybeat
+
+Step 3:
+-- Create 2 directories to save log files:
+	mkdir /var/log/celery
+	mkdir /var/run/celery
+
+=================================================================================
+RUNNING:
+1. celeryd
+Run:	/etc/init.d/celeryd {start|stop|restart|status}
+
+
+2. celerybeat
+Run:	/etc/init.d/celerybeat {start|stop|restart}
+=================================================================================
+
+********
+RUN automatically when Server boots:
+sudo update-rc.d celeryd defaults
+sudo update-rc.d celerybeat defaults
+
+*******
+Note: Please supply approprivate privilege to run command:
+chmod 777 /etc/init.d/celeryd /celerybeat
+chmod 777 /etc/default/celeryd /celerybeat
+chmod 777 /var/log/celery
+chmod 777 /var/run/celery
+
+-------------------------------------------------------------
+INSTRUCTION DETAIL HERE:
+--- Read instruction here
+------https://groups.google.com/forum/#!topic/celery-users/unOygQAjhSU
+and here
+------Running the worker as a daemon
+------http://docs.celeryproject.org/en/latest/tutorials/daemonizing.html
+
+

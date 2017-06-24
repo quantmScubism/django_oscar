@@ -1,0 +1,69 @@
+SEARCH VIDEOS TASK IN INSERT MEDIA MODAL
+
+Document about Google APIs: 
+	- https://developers.google.com/youtube/v3/code_samples/python?hl=vi#search_by_keyword
+	- Github: https://github.com/youtube/api-samples/tree/master/python
+	- Install: https://code.google.com/p/google-api-python-client/
+
+To using Search Videos in Insert Media modal, We install 2 package before
+Ex:
+	- pip install google-api-python-client
+	- pip install oauth2client
+Document for that: 
+	- google-api-python-client: The core Python library for accessing Google APIs.
+	(https://code.google.com/p/google-api-python-client/wiki/SampleApps)
+	- oauth2client: A Python client library for OAuth 2.0.
+	(https://code.google.com/p/youtube-api-samples/source/browse/#git%2Fsamples%2Fpython)
+
+
+OAuth access of gmail account info bellow:
+================
+OAuth
+================
+
+================================================
+Client ID for Google Compute and App Engine:
+ - Client ID:	798262164092.project.googleusercontent.com
+ - Email address:	798262164092@project.googleusercontent.com
+ - Redirect URIs:	none
+ - JavaScript origins:	none
+================================================
+
+Client ID for web application
+ - Client ID:	798262164092.apps.googleusercontent.com
+ - Email address:	798262164092@developer.gserviceaccount.com
+ - Client secret:	xj2LvEm3gsQiZcz_6aBflGG9
+ - Redirect URIs:	http://eshop.com:8000/accounts/google/login/callback/
+ - Javascript Origins:	http://eshop.com:8000 
+================================================
+
+Service Account
+ - Client ID	798262164092-cckdp1msp55sc0r5rlrroe6fu9n725b0.apps.googleusercontent.com
+ - Email address	798262164092-cckdp1msp55sc0r5rlrroe6fu9n725b0@developer.gserviceaccount.com
+ - Public key fingerprints: 4dda1e4ae0015924f76b1b266c3a398b7c741dc7 
+================================================
+
+================
+Public API access
+================
+
+================================================
+Key for browser applications
+ - API key:	AIzaSyBz6qYsIQgMcbbEr7xQNZuwGOomcR7Bqgg
+ - Referers: http://demo-oscar.dev:8000/
+ 
+================================================
+Key for browser applications
+ - API key:	AIzaSyB4bOPDr1jcyclAlh1hbsK5Zx0-v-rhC3k
+ - Referers: http://demo-oscar.dev:8000/
+ 
+================================================
+Key for browser applications
+ - API key:	AIzaSyBBFZWEYd07X6mIf44b6k1TITfCeR6QTII
+ - Referers: Any referer allowed
+
+================================================
+Key for server applications
+ - API key:	AIzaSyC7fPorP0QS_4fNqVT7sCRQurDk_jUYJRU
+ - IPs: Any IP allowed
+ 

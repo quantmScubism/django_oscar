@@ -1,0 +1,17 @@
+1. Create database ex: demo_oscar
+2. Setting DATABASES Like:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'demo_oscar',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    },
+}
+
+3. Run cmd: python manage.py syncdb
+4. Run cmd: python manage.py migrate oscar.apps.address
+5. Run cmd: 4. Run cmd: python manage.py migrate

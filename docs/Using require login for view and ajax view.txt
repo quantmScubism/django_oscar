@@ -1,0 +1,35 @@
+
+
+1. USING REQUIRE LOGIN FOR AJAX VIEW
+
+	- To using require login for function view basic:
+		+ Import:
+			from apps.common.decorator import ajax_login_required
+		+Coding:
+			@ajax_login_required
+			def view_function_name(request):
+				#code here
+			
+	- To using require login for class view:
+		+ Import:
+			from apps.common.decorator import AjaxLoginRequiredMixin
+		+Coding:
+			class Test(LoginRequiredMixinAjax, ...):
+				#code here
+			
+2. USING REQUIRE LOGIN FOR VIEW BASIC
+	
+	- To using require login for function view basic:
+		+ Import library:
+			from django.contrib.auth.decorators import login_required			
+		+ code:
+			@login_required
+			def view_function_name(request):
+				#code here
+				
+	- To using require login for class view:
+		+ Import:
+			from apps.common.decorator import LoginRequiredMixin
+		+Coding:
+			class Test(LoginRequiredMixin, ...):
+				#code here
